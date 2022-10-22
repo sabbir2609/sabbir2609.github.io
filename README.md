@@ -2,4 +2,4 @@
 
 ## Student | Hobby dev
 
-### [Visit My Blog]('https://www.sabbirprime.me')
+### [Visit My Blog](https://www.sabbirprime.me)
