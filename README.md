@@ -5,8 +5,8 @@
 # Hi there, I'm [Sabbir](https://www.linkedin.com/in/sabbir2609/) 👋
 
 I am a postgraduate student specializing in Solid State Physics, focusing on developing advanced materials through my
-MSc studies. Alongside my academic pursuits, I excel in full stack development using Python (Django) and JavaScript
-(React/Next.js), with a track record of successfully completing various projects. Known for my ambition and ability to
+MSc studies. Alongside my academic pursuits, I excel in full-stack development using Python (Django) and JavaScript
+(React/Next.js), with a track record of completing various projects. Known for my ambition and ability to
 perform effectively under pressure, I bring a unique blend of scientific rigor and technical proficiency to my work.
 
 ## 📫 How to reach me
@@ -26,20 +26,16 @@ perform effectively under pressure, I bring a unique blend of scientific rigor a
 
 ### 🚀 Projects
 
-1. #### [Transportation Management System](https://github.com/sabbir2609/transportation-management-system)
-
-2. #### [Plant-Based Decor Website](https://github.com/sabbir2609/plant-based-decor)
-
-3. #### [Hotel Management System](https://github.com/sabbir2609/hotel-management-system)
-
-4. #### [CO2 Forecasting](https://github.com/sabbir2609/co2-forecasting)
-
-5. #### [Headless E-commerce Project](https://github.com/sabbir2609/headless-ecommerce)
-
-6. #### [School Management System](https://github.com/sabbir2609/school-management-system)
-
-7. #### [Personal Portfolio Website](https://github.com/sabbir2609/sabbir2609)
-
+1. #### Plant-Based Decor Website [Frontend](https://github.com/sabbir2609/plantx-fe) / [Backend](https://github.com/sabbir2609/plantx-be)
+2. #### Hotel Management System [Frontend](https://github.com/sabbir2609/zenith-fe) / [Backend](https://github.com/sabbir2609/zenith-be)
+3. #### [Material Simulation](https://github.com/sabbir2609/matsimx)
+4. #### [Material Properties Analysis](https://github.com/sabbir2609/material_analysis)
+5. #### [Headless E-commerce Project](https://github.com/sabbir2609/Storefront)
+6. #### [Scrapper](https://github.com/sabbir2609/django-scrap)
+7. #### [School Management System](https://github.com/sabbir2609/next-school)
+8. #### [Personal Portfolio Website](https://github.com/sabbir2609/sabbir2609)
+9. #### [Transportation Management System](https://github.com/sabbir2609/transportx)
+   
 Feel free to explore these projects and reach out if you have any questions or collaboration ideas!
 
 ### 💻 Tech Stack
