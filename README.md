@@ -1,6 +1,4 @@
-<p align="center" width="full">
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTd5NjJmZjNjYWtyOTk5ODJzNTY0bnBuNGNnNmM0ZXdiYXFndGNncyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fdOA43sHFE6Pu/giphy.webp" alt="banner" />
-</p>
+<img align="center" width="full" src="https://user-images.githubusercontent.com/74038190/212284136-03988914-d899-44b4-b1d9-4eeccf656e44.gif" alt="banner" />
 
 # Hi there, I'm [Sabbir](https://www.linkedin.com/in/sabbir2609/) 👋
 
