@@ -184,7 +184,7 @@ export default function Navbar() {
 
             {/* Mobile Slide-Out Drawer Navigation Menu */}
             <div
-                className={`lg:hidden fixed inset-0 top-[57px] bg-base-100/98 backdrop-blur-xl z-50 transform ${isOpen
+                className={`lg:hidden fixed inset-0 top-14.25 bg-base-100/98 backdrop-blur-xl z-50 transform ${isOpen
                     ? 'translate-x-0 opacity-100 pointer-events-auto'
                     : 'translate-x-full opacity-0 pointer-events-none'
                     } transition-all duration-300 ease-in-out border-t border-base-200 flex flex-col p-6 space-y-6 overflow-y-auto h-[calc(100vh-57px)]`}
