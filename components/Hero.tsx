@@ -1,34 +1,35 @@
 import profileImage from "@/public/me/profile.jpg";
-import { Facebook, Github, Instagram, Linkedin, Twitter } from "lucide-react";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
+import { MdMailOutline } from "react-icons/md";
 
 export default function Hero() {
     const socialLinks = [
         {
             href: 'https://github.com/sabbir2609',
             label: 'Github',
-            icon: <Github size={24} />,
+            icon: <FaGithub size={24} />,
         },
         {
             href: 'https://www.linkedin.com/in/sabbir2609',
             label: 'LinkedIn',
-            icon: <Linkedin size={24} />,
+            icon: <FaLinkedin size={24} />,
         },
         {
             href: 'https://twitter.com/sabbir2609',
             label: 'Twitter',
-            icon: <Twitter size={24} />,
+            icon: <FaTwitter size={24} />,
         },
         {
-            href: 'https://instagram.com/sabbir2609',
+            href: 'https://instagram.com/0xsabbir',
             label: 'Instagram',
-            icon: <Instagram size={24} />,
+            icon: <FaInstagram size={24} />,
         },
         {
-            href: 'https://m.me/sabbir2609',
-            label: 'Messenger',
-            icon: <Facebook size={24} />,
+            href: 'https://fb.me/0xsabbir',
+            label: 'Facebook',
+            icon: <FaFacebook size={24} />,
         }
     ];
     return (
@@ -50,17 +51,18 @@ export default function Hero() {
                         <p className="pt-6 text-lg">I am a Full Stack Developer. I love to solve problems and write code. I am passionate about learning new technologies and building new things. I am a quick learner and love to work in a team. I am always ready to take new challenges and solve them.</p>
                         <div className="flex mt-4 space-x-2">
                             <Link
-                                href="/doc/resume.pdf"
+                                href="/doc/sabbir_academic_cv.pdf"
                                 target="_blank"
                                 className="btn btn-primary rounded-md"
                             >
                                 Resume
                             </Link>
                             <Link
-                                href="/contact"
-                                className="btn btn-secondary rounded-md"
+                                href="mailto:sabbirhasan2999@gmail.com"
+                                className="btn btn-secondary rounded-full flex items-center space-x-2"
                             >
-                                Contact
+                                <MdMailOutline size={24} />
+                                <span>Mail Me</span>
                             </Link>
                         </div>
                         <div className="flex mt-4 space-x-4">

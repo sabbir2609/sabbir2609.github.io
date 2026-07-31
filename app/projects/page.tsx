@@ -90,6 +90,7 @@ export default function Projects() {
                                 width={500}
                                 height={500}
                                 className="h-52 object-cover w-full"
+                                unoptimized
                             />
                         </figure>
                         <div className="card-body">

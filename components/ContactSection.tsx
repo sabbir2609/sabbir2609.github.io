@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Mail, MessageSquare } from 'lucide-react';
+import { FaWhatsapp } from "react-icons/fa6";
+import { MdMailOutline } from "react-icons/md";
+
 
 export default function ContactSection() {
     return (
@@ -16,14 +18,14 @@ export default function ContactSection() {
                         target="_blank"
                         className="btn btn-primary rounded-full flex items-center space-x-2"
                     >
-                        <MessageSquare size={24} />
+                        <FaWhatsapp size={24} />
                         <span>WhatsApp</span>
                     </Link>
                     <Link
                         href="mailto:sabbirhasan2999@gmail.com"
                         className="btn btn-secondary rounded-full flex items-center space-x-2"
                     >
-                        <Mail size={24} />
+                        <MdMailOutline size={24} />
                         <span>Mail Me</span>
                     </Link>
                 </div>

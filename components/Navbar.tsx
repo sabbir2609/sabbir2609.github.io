@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { CircleX, SquareChevronLeft } from 'lucide-react';
+import { FaRegTimesCircle, FaRegArrowAltCircleLeft } from "react-icons/fa";
 import ThemeChange from './utils/ThemeChange';
 
 export default function Navbar() {
@@ -51,7 +51,7 @@ export default function Navbar() {
 
                     <div className="md:hidden z-50">
                         <button onClick={toggleMenu} className="btn btn-ghost btn-circle transition duration-500 ease-in-out transform hover:scale-110 focus:outline-none">
-                            {isOpen ? <CircleX /> : <SquareChevronLeft />}
+                            {isOpen ? <FaRegTimesCircle /> : <FaRegArrowAltCircleLeft />}
                         </button>
                     </div>
 

@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa6";
 import Link from "next/link";
 
 export default function Footer() {
@@ -11,13 +11,13 @@ export default function Footer() {
                 </div>
                 <div className="mt-4 md:mt-0 flex space-x-4">
                     <Link href="https://github.com/sabbir2609" target="_blank" aria-label="Github" className="hover:text-gray-400">
-                        <Github size={24} />
+                        <FaGithub size={24} />
                     </Link>
                     <Link href="https://www.linkedin.com/in/sabbir2609" target="_blank" aria-label="LinkedIn" className="hover:text-gray-400">
-                        <Linkedin size={24} />
+                        <FaLinkedin size={24} />
                     </Link>
                     <Link href="https://x.com/sabbir2609" target="_blank" aria-label="Twitter" className="hover:text-gray-400">
-                        <Twitter size={24} />
+                        <FaTwitter size={24} />
                     </Link>
                 </div>
             </div>
