@@ -420,35 +420,39 @@ export default function AcademicSections() {
 
             {/* 9. ACADEMIC REFERENCES */}
             <section id="contact" className="scroll-mt-20">
-                <div className="flex items-center space-x-3 mb-6">
-                    <div className="p-3 bg-primary/10 text-primary rounded-xl">
-                        <FaUserCheck size={24} />
-                    </div>
-                    <div>
-                        <h2 className="text-2xl sm:text-3xl font-extrabold">Academic References</h2>
-                        <p className="text-sm text-base-content/70">Professors and research supervisors</p>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {references.map((ref, idx) => (
-                        <div key={idx} className="bg-base-100 p-5 rounded-2xl border border-base-200 shadow-sm flex flex-col justify-between space-y-3">
-                            <div className="space-y-1">
-                                <h3 className="font-extrabold text-base">{ref.name}</h3>
-                                <p className="text-xs font-semibold text-primary">{ref.title}</p>
-                                <p className="text-xs text-base-content/70">{ref.institution}</p>
+                <div tabIndex={0} className="collapse collapse-arrow bg-base-100 border-base-300 border">
+                    <div className="collapse-title font-semibold">
+                        <div className="flex items-center space-x-3 mb-6">
+                            <div className="p-3 bg-primary/10 text-primary rounded-xl">
+                                <FaUserCheck size={24} />
                             </div>
-                            <a
-                                href={`mailto:${ref.email}`}
-                                className="btn btn-xs btn-outline btn-primary gap-1 w-full font-mono mt-2"
-                            >
-                                <FaExternalLinkAlt size={10} /> {ref.email}
-                            </a>
+                            <div>
+                                <h2 className="text-2xl sm:text-3xl font-extrabold">Academic References</h2>
+                                <p className="text-sm text-base-content/70">Professors and research supervisors</p>
+                            </div>
                         </div>
-                    ))}
+                    </div>
+                    <div className="collapse-content text-sm">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {references.map((ref, idx) => (
+                                <div key={idx} className="bg-base-100 p-5 rounded-2xl border border-base-200 shadow-sm flex flex-col justify-between space-y-3">
+                                    <div className="space-y-1">
+                                        <h3 className="font-extrabold text-base">{ref.name}</h3>
+                                        <p className="text-xs font-semibold text-primary">{ref.title}</p>
+                                        <p className="text-xs text-base-content/70">{ref.institution}</p>
+                                    </div>
+                                    <a
+                                        href={`mailto:${ref.email}`}
+                                        className="btn btn-xs btn-outline btn-primary gap-1 w-full font-mono mt-2 truncate"
+                                    >
+                                        <FaExternalLinkAlt size={10} className="shrink-0" /> <span className="truncate">{ref.email}</span>
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </section>
-
         </div>
     );
 }

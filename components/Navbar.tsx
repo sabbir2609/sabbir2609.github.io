@@ -183,64 +183,61 @@ export default function Navbar() {
             </nav>
 
             {/* Mobile Slide-Out Drawer Navigation Menu */}
-            <div
-                className={`lg:hidden fixed inset-0 top-14.25 bg-base-100/98 backdrop-blur-xl z-50 transform ${isOpen
-                    ? 'translate-x-0 opacity-100 pointer-events-auto'
-                    : 'translate-x-full opacity-0 pointer-events-none'
-                    } transition-all duration-300 ease-in-out border-t border-base-200 flex flex-col p-6 space-y-6 overflow-y-auto h-[calc(100vh-57px)]`}
-            >
-                <div className="flex flex-col space-y-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-base-content/50 px-2 pb-1 border-b border-base-200">
-                        {isDevPage ? 'Developer Navigation' : 'Academic Navigation'}
-                    </span>
-                    {isDevPage ? (
-                        devMenuItems.map((item, index) => (
-                            <Link
-                                key={index}
-                                href={item.href}
-                                onClick={closeMenu}
-                                className="text-lg font-semibold px-3 py-2.5 rounded-xl hover:bg-base-200 transition-colors flex items-center justify-between"
-                            >
-                                <span>{item.name}</span>
-                            </Link>
-                        ))
-                    ) : (
-                        academicMenuItems.map((item, index) => {
-                            const href = getLinkHref(item.hash);
-                            return (
-                                <a
+            {isOpen && (
+                <div className="lg:hidden fixed top-full left-0 right-0 w-full bg-base-100 backdrop-blur-xl z-50 border-t border-base-200 flex flex-col p-6 space-y-6 overflow-y-auto h-[calc(100vh-64px)] shadow-2xl">
+                    <div className="flex flex-col space-y-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-base-content/50 px-2 pb-1 border-b border-base-200">
+                            {isDevPage ? 'Developer Navigation' : 'Academic Navigation'}
+                        </span>
+                        {isDevPage ? (
+                            devMenuItems.map((item, index) => (
+                                <Link
                                     key={index}
-                                    href={href}
-                                    onClick={(e) => handleNavClick(e, href)}
+                                    href={item.href}
+                                    onClick={closeMenu}
                                     className="text-lg font-semibold px-3 py-2.5 rounded-xl hover:bg-base-200 transition-colors flex items-center justify-between"
                                 >
                                     <span>{item.name}</span>
-                                </a>
-                            );
-                        })
-                    )}
-                </div>
+                                </Link>
+                            ))
+                        ) : (
+                            academicMenuItems.map((item, index) => {
+                                const href = getLinkHref(item.hash);
+                                return (
+                                    <a
+                                        key={index}
+                                        href={href}
+                                        onClick={(e) => handleNavClick(e, href)}
+                                        className="text-lg font-semibold px-3 py-2.5 rounded-xl hover:bg-base-200 transition-colors flex items-center justify-between"
+                                    >
+                                        <span>{item.name}</span>
+                                    </a>
+                                );
+                            })
+                        )}
+                    </div>
 
-                <div className="pt-4 border-t border-base-200 flex flex-col space-y-3">
-                    {isDevPage ? (
-                        <Link
-                            href="/"
-                            onClick={closeMenu}
-                            className="btn btn-primary w-full flex items-center justify-center gap-2 rounded-xl py-3"
-                        >
-                            <FaGraduationCap /> View Academic CV
-                        </Link>
-                    ) : (
-                        <Link
-                            href="/dev"
-                            onClick={closeMenu}
-                            className="btn btn-primary w-full flex items-center justify-center gap-2 rounded-xl py-3"
-                        >
-                            <FaCode /> Switch to Developer Portal
-                        </Link>
-                    )}
+                    <div className="pt-4 border-t border-base-200 flex flex-col space-y-3">
+                        {isDevPage ? (
+                            <Link
+                                href="/"
+                                onClick={closeMenu}
+                                className="btn btn-primary w-full flex items-center justify-center gap-2 rounded-xl py-3"
+                            >
+                                <FaGraduationCap /> View Academic CV
+                            </Link>
+                        ) : (
+                            <Link
+                                href="/dev"
+                                onClick={closeMenu}
+                                className="btn btn-primary w-full flex items-center justify-center gap-2 rounded-xl py-3"
+                            >
+                                <FaCode /> Switch to Developer Portal
+                            </Link>
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
         </header>
     );
 }
