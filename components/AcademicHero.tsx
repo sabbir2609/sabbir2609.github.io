@@ -9,7 +9,7 @@ export default function AcademicHero() {
     const masterDegree = education[0];
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-base-200/50 via-base-100 to-base-100 py-12 md:py-20 border-b border-base-200">
+        <section className="relative overflow-hidden bg-linear-to-b from-base-200/50 via-base-100 to-base-100 py-12 md:py-20 border-b border-base-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                     {/* Left Column: Information */}
@@ -27,21 +27,16 @@ export default function AcademicHero() {
                                 {personalInfo.specialization}
                             </p>
                             <p className="text-sm font-mono text-primary flex items-center gap-1.5 pt-1">
-                                <FaGraduationCap /> {masterDegree.institution} • {masterDegree.lab}
+                                {masterDegree.institution} <br />
+                                {masterDegree.lab}
                             </p>
                         </div>
 
                         {/* Research Aspiration Quote / Summary */}
                         <div className="bg-base-200/60 p-5 rounded-2xl border border-base-300 backdrop-blur-sm relative">
-                            <p className="text-sm sm:text-base text-base-content/90 leading-relaxed italic">
-                                &quot;{personalInfo.bio.slice(0, 320)}...&quot;
+                            <p className="text-sm sm:text-base text-base-content/90 leading-relaxed">
+                                &quot;Rage rage against the dying of the light...&quot;
                             </p>
-                            <div className="mt-3 pt-3 border-t border-base-300/60 flex flex-wrap gap-2 text-xs font-medium text-base-content/70">
-                                <span className="bg-base-100 px-2.5 py-1 rounded-md border border-base-300">Quantum Magnetism</span>
-                                <span className="bg-base-100 px-2.5 py-1 rounded-md border border-base-300">DFT Calculations</span>
-                                <span className="bg-base-100 px-2.5 py-1 rounded-md border border-base-300">Spinel Ferrites</span>
-                                <span className="bg-base-100 px-2.5 py-1 rounded-md border border-base-300">2D Materials</span>
-                            </div>
                         </div>
 
                         {/* Call to Action Buttons */}
@@ -64,7 +59,7 @@ export default function AcademicHero() {
                                 href="/dev"
                                 className="btn btn-secondary btn-outline flex items-center gap-2 rounded-xl"
                             >
-                                <FaCode /> Developer & Projects Portal (/dev)
+                                <FaCode /> Developer & Projects
                             </Link>
                         </div>
 
@@ -83,7 +78,7 @@ export default function AcademicHero() {
                     <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center">
                         <div className="relative group">
                             {/* Decorative Glow */}
-                            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-primary to-secondary opacity-30 blur-xl group-hover:opacity-50 transition duration-500"></div>
+                            <div className="absolute -inset-1 rounded-3xl bg-linear-to-r from-primary to-secondary opacity-30 blur-xl group-hover:opacity-50 transition duration-500"></div>
 
                             <div className="relative rounded-3xl overflow-hidden border-4 border-base-100 bg-base-200 shadow-2xl w-64 h-64 sm:w-72 sm:h-72">
                                 <Image

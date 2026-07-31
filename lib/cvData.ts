@@ -84,12 +84,12 @@ export const cvData = {
     github: "https://github.com/sabbir2609",
     cvPdfPath: "/doc/sabbir_academic_cv.pdf",
     profilePic: "/me/profile.jpg",
-    bio: "I am a Physics postgraduate researcher with expertise in experimental condensed matter physics and computational materials science. My research combines the synthesis and characterization of magnetic materials with first-principles Density Functional Theory (DFT) calculations to investigate their structural, electronic, and magnetic properties. I have hands-on experience in solid-state synthesis, advanced materials characterization, and Python-based scientific computing for data analysis and materials modeling. My recent work on transition-metal-doped two-dimensional materials has strengthened my interest in quantum magnetism, spin-dependent phenomena, and low-dimensional systems. I seek a PhD position where I can integrate experimental and computational approaches to investigate atomic-scale quantum materials and emergent magnetic phenomena while developing advanced quantum characterization techniques."
+    bio: "I am a Physics postgraduate researcher specialized in computational materials science and experimental condensed matter physics. My research includes synthesis and characterization of functional materials and first-principles Density Functional Theory (DFT) calculations to explore their structural, electronic, magnetic and spin-dependent properties. My expertise includes solid-state synthesis, advanced materials characterization, and scientific computing using Python for data analysis and materials modeling. My recent research on transition-metal-doped two-dimensional materials and altermagnetic systems has further stimulated my interest in electronic structure theory, quantum materials and computational methods for functional materials. I am looking for a PhD position that could combine first-principles simulations and experimental collaboration to further understand and design next-generation materials."
   },
 
   education: [
     {
-      institution: "Khulna University of Engineering & Technology (KUET)",
+      institution: "Khulna University of Engineering & Technology",
       location: "Khulna, Bangladesh",
       degree: "MSc in Physics",
       gpa: "3.25 / 4.0",
@@ -223,11 +223,11 @@ export const cvData = {
       presentations: [
         {
           type: "Oral Presentation",
-          title: "Enhanced Adsorption and Activation of Greenhouse and Toxic Gases on Mo‑doped hBN Monolayers: A First‑Principles Investigation."
+          title: "Enhanced Adsorption and Activation of Greenhouse and Toxic Gases on Mo-doped hBN Monolayers: A First-Principles Investigation."
         },
         {
           type: "Poster Presentation",
-          title: "Magneto‑Dielectric and Relaxation Behavior of Yttrium‑Substituted Mg–Zn and Mn–Zn Spinel Ferrites for High‑Frequency Applications."
+          title: "Magneto-Dielectric and Relaxation Behavior of Yttrium-Substituted Mg-Zn and Mn-Zn Spinel Ferrites for High-Frequency Applications."
         }
       ]
     },

@@ -43,7 +43,7 @@ export const devData = {
       category: "Computational Tool",
       description: "Automated crystal structure generation and DFT screening workflow using Microsoft MatterGen, MatCalc, CASTEP, Quantum ESPRESSO, and Python data visualization.",
       technologies: ["Python", "MatterGen", "CASTEP", "Quantum ESPRESSO", "MatCalc", "VESTA"],
-      repo: "Fast-AI-Material-Screening",
+      repo: "matsimx",
       githubUrl: "https://github.com/sabbir2609/matsimx",
       featured: true
     },
@@ -94,7 +94,7 @@ export const devData = {
       description: "E-commerce & gallery site for sustainable plant-based home decor powered by Django backend, Next.js frontend, and Cloudinary media management.",
       technologies: ["Next.js", "Django", "Cloudinary", "Tailwind CSS"],
       image: "/image/viriditas.png",
-      liveLink: "https://theviriditas.com/",
+      liveLink: "https://viriditas.vercel.app/",
       featured: true
     }
   ] as DevProject[]

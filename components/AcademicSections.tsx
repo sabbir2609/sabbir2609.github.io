@@ -186,7 +186,7 @@ export default function AcademicSections() {
                                     </p>
                                     {edu.lab && (
                                         <p className="text-xs text-base-content/70 mt-1">
-                                            <strong>Laboratory:</strong> {edu.lab} ({edu.specialization})
+                                            <strong>Laboratory:</strong> {edu.lab}
                                         </p>
                                     )}
                                 </div>
@@ -246,7 +246,7 @@ export default function AcademicSections() {
                     </div>
 
                     {/* Group Leadership Card */}
-                    <div className="lg:col-span-5 bg-gradient-to-br from-base-200 to-base-300/50 p-6 rounded-2xl border border-base-300 space-y-4">
+                    <div className="lg:col-span-5 bg-linear-to-br from-base-200 to-base-300/50 p-6 rounded-2xl border border-base-300 space-y-4">
                         <h3 className="text-base font-bold flex items-center gap-2">
                             <FaUsers className="text-primary" /> Active Group Leadership Projects
                         </h3>

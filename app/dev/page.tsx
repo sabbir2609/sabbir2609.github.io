@@ -21,7 +21,7 @@ export default function DevPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
                 {/* DEVELOPER HERO */}
-                <section className="bg-gradient-to-br from-base-200/80 via-base-100 to-base-200/40 p-8 sm:p-12 rounded-3xl border border-base-300 shadow-sm relative overflow-hidden">
+                <section className="bg-linear-to-br from-base-200/80 via-base-100 to-base-200/40 p-8 sm:p-12 rounded-3xl border border-base-300 shadow-sm relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none hidden md:block">
                         <FaCode size={220} />
                     </div>
