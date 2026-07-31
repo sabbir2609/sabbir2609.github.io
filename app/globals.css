@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure mobile menu doesn't cause unwanted horizontal overflow */
+body {
+  overflow-x: hidden;
+}
