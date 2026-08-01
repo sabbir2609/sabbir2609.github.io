@@ -77,22 +77,27 @@ export default function AcademicHero() {
                     {/* Right Column: Profile Image & Badge */}
                     <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center">
                         <div className="relative group">
+
                             {/* Decorative Glow */}
                             <div className="absolute -inset-1 rounded-3xl bg-linear-to-r from-primary to-secondary opacity-30 blur-xl group-hover:opacity-50 transition duration-500"></div>
 
-                            <div className="relative rounded-3xl overflow-hidden border-4 border-base-100 bg-base-200 shadow-2xl w-64 h-64 sm:w-72 sm:h-72">
-                                <Image
-                                    src={profilePic}
-                                    alt={personalInfo.name}
-                                    fill
-                                    priority
-                                    sizes="(max-width: 768px) 256px, 288px"
-                                    className="object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
-                                />
+                            {/* Profile Image Card with Aura Wrapper */}
+                            <div className="aura aura-rainbow p-1 rounded-[28px]">
+                                <div className="card bg-base-100 rounded-3xl overflow-hidden border-4 border-base-100 shadow-2xl w-64 h-64 sm:w-72 sm:h-72 relative">
+                                    {/* Next.js Image rendered at full brightness and sharp quality */}
+                                    <Image
+                                        src={profilePic}
+                                        alt={personalInfo.name}
+                                        fill
+                                        priority
+                                        sizes="(max-width: 768px) 256px, 288px"
+                                        className="object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
                             </div>
 
                             {/* Badge Tag */}
-                            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-base-100 text-base-content px-4 py-1.5 rounded-full border border-base-300 shadow-md text-xs font-bold whitespace-nowrap flex items-center gap-1.5">
+                            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-base-100 text-base-content px-4 py-1.5 rounded-full border border-base-300 shadow-md text-xs font-bold whitespace-nowrap flex items-center gap-1.5 z-10">
                                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                                 Seeking PhD Position
                             </div>
