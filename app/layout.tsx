@@ -1,7 +1,8 @@
+import { Footer, Navbar } from "@/components";
+import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 import { Inter, Jost } from "next/font/google";
 import "./globals.css";
-import { Footer, Navbar } from "@/components";
 
 import NextTopLoader from 'nextjs-toploader';
 
@@ -39,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={jost.className}>
         <NextTopLoader />
         <Navbar />

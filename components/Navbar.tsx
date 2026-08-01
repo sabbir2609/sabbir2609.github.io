@@ -32,21 +32,22 @@ export default function Navbar() {
         };
     }, [isOpen]);
 
-    const getLinkHref = (hash: string) => {
-        if (isHomePage) {
-            return `#${hash}`;
+    const getLinkHref = (href: string) => {
+        if (!href.startsWith("#")) {
+            return href;
         }
-        return `/#${hash}`;
+
+        return isHomePage ? href : `/${href}`;
     };
 
     const academicMenuItems = [
-        { name: 'Overview', hash: 'overview' },
-        { name: 'Education', hash: 'education' },
-        { name: 'Research', hash: 'research' },
-        { name: 'Publications', hash: 'manuscripts' },
-        { name: 'Conferences', hash: 'conferences' },
-        { name: 'Skills', hash: 'skills' },
-        { name: 'Contact', hash: 'contact' },
+        { name: "Overview", href: "#overview" },
+        { name: "Education", href: "#education" },
+        { name: "Research", href: "#research" },
+        { name: "Publications", href: "#manuscripts" },
+        { name: "Conferences", href: "#conferences" },
+        { name: "Skills", href: "#skills" },
+        { name: "Blog", href: "/blog" },
     ];
 
     const devMenuItems = [
@@ -56,15 +57,18 @@ export default function Navbar() {
         { name: 'Academic Profile', href: '/' },
     ];
 
-    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const handleNavClick = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        href: string
+    ) => {
         closeMenu();
-        if (href.startsWith('#')) {
+        if (href.startsWith("#")) {
             e.preventDefault();
-            const targetId = href.replace('#', '');
+            const targetId = href.slice(1);
             const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-            }
+            targetElement?.scrollIntoView({
+                behavior: "smooth",
+            });
         }
     };
 
@@ -106,17 +110,18 @@ export default function Navbar() {
                             </Link>
                         ))
                     ) : (
-                        academicMenuItems.map((item, index) => {
-                            const href = getLinkHref(item.hash);
+                        academicMenuItems.map((item) => {
+                            const href = getLinkHref(item.href);
+
                             return (
-                                <a
-                                    key={index}
+                                <Link
+                                    key={item.href}
                                     href={href}
                                     onClick={(e) => handleNavClick(e, href)}
                                     className="btn btn-ghost btn-sm font-medium hover:bg-base-200 transition-colors"
                                 >
                                     {item.name}
-                                </a>
+                                </Link>
                             );
                         })
                     )}
@@ -149,7 +154,7 @@ export default function Navbar() {
 
                     {/* Social Quick Links */}
                     <div className="hidden sm:flex items-center space-x-1 pl-1 border-l border-base-300">
-                        <a
+                        <Link
                             href="https://github.com/sabbir2609"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -157,8 +162,8 @@ export default function Navbar() {
                             title="GitHub Profile"
                         >
                             <FaGithub size={18} />
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             href="https://www.linkedin.com/in/sabbir2609"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -166,7 +171,7 @@ export default function Navbar() {
                             title="LinkedIn Profile"
                         >
                             <FaLinkedin size={18} />
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Mobile Hamburger Toggle Button */}
@@ -201,17 +206,18 @@ export default function Navbar() {
                                 </Link>
                             ))
                         ) : (
-                            academicMenuItems.map((item, index) => {
-                                const href = getLinkHref(item.hash);
+                            academicMenuItems.map((item) => {
+                                const href = getLinkHref(item.href);
+
                                 return (
-                                    <a
-                                        key={index}
+                                    <Link
+                                        key={item.href}
                                         href={href}
                                         onClick={(e) => handleNavClick(e, href)}
                                         className="text-lg font-semibold px-3 py-2.5 rounded-xl hover:bg-base-200 transition-colors flex items-center justify-between"
                                     >
                                         <span>{item.name}</span>
-                                    </a>
+                                    </Link>
                                 );
                             })
                         )}

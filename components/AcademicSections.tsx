@@ -1,7 +1,5 @@
-'use client';
-
-import { useState } from 'react';
-import { cvData, Manuscript } from '@/lib/cvData';
+import { cvData } from '@/lib/cvData';
+import Link from 'next/link';
 import {
     FaBookOpen, FaGraduationCap, FaFlask, FaMicroscope,
     FaUsers, FaAward, FaChalkboardTeacher, FaUserCheck, FaRegCopy, FaCheck, FaExternalLinkAlt
@@ -14,15 +12,6 @@ export default function AcademicSections() {
         academicProjects, conferences, skills, webinarsAndCertifications,
         professionalExperience, memberships, references
     } = cvData;
-
-    const [copiedId, setCopiedId] = useState<string | null>(null);
-
-    const handleCopyCitation = (ms: Manuscript) => {
-        const citation = `S. H. Munna et al., "${ms.title}", ${ms.journal} (${ms.status}).`;
-        navigator.clipboard.writeText(citation);
-        setCopiedId(ms.id);
-        setTimeout(() => setCopiedId(null), 2000);
-    };
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
@@ -126,21 +115,6 @@ export default function AcademicSections() {
 
                                 <div className="mt-4 pt-4 border-t border-base-200 flex items-center justify-between text-xs">
                                     <span className="text-base-content/60 font-medium">{ms.type}</span>
-                                    <button
-                                        onClick={() => handleCopyCitation(ms)}
-                                        className="btn btn-xs btn-ghost gap-1 hover:bg-base-200"
-                                        title="Copy formatted citation"
-                                    >
-                                        {copiedId === ms.id ? (
-                                            <>
-                                                <FaCheck className="text-emerald-500" /> Copied
-                                            </>
-                                        ) : (
-                                            <>
-                                                <FaRegCopy /> Copy Citation
-                                            </>
-                                        )}
-                                    </button>
                                 </div>
                             </div>
                         );
@@ -274,7 +248,7 @@ export default function AcademicSections() {
                                 <h4 className="font-bold text-sm sm:text-base leading-snug">{proj.title}</h4>
                                 <ul className="text-xs text-base-content/70 space-y-1">
                                     {proj.description.map((desc, dIdx) => (
-                                        <li key={dIdx}>• {desc}</li>
+                                        <li key={dIdx}>■ {desc}</li>
                                     ))}
                                 </ul>
                                 <div className="flex flex-wrap gap-1 pt-2">
@@ -410,7 +384,7 @@ export default function AcademicSections() {
                             <p className="text-xs text-base-content/60">{exp.location}</p>
                             <ul className="text-xs sm:text-sm text-base-content/80 space-y-1.5 pt-2 border-t border-base-200">
                                 {exp.highlights.map((h, hIdx) => (
-                                    <li key={hIdx}>• {h}</li>
+                                    <li key={hIdx}>■ {h}</li>
                                 ))}
                             </ul>
                         </div>
@@ -441,12 +415,12 @@ export default function AcademicSections() {
                                         <p className="text-xs font-semibold text-primary">{ref.title}</p>
                                         <p className="text-xs text-base-content/70">{ref.institution}</p>
                                     </div>
-                                    <a
+                                    <Link
                                         href={`mailto:${ref.email}`}
                                         className="btn btn-xs btn-outline btn-primary gap-1 w-full font-mono mt-2 truncate"
                                     >
                                         <FaExternalLinkAlt size={10} className="shrink-0" /> <span className="truncate">{ref.email}</span>
-                                    </a>
+                                    </Link>
                                 </div>
                             ))}
                         </div>

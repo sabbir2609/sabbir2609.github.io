@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cvData } from "@/lib/cvData";
-import { FaGraduationCap, FaEnvelope, FaFileDownload, FaCode, FaGithub, FaLinkedin, FaFlask } from "react-icons/fa";
+import { FaEnvelope, FaFileDownload, FaCode, FaGithub, FaLinkedin, FaFlask } from "react-icons/fa";
 import profilePic from "@/public/me/profile.jpg";
 
 export default function AcademicHero() {
@@ -27,8 +27,8 @@ export default function AcademicHero() {
                                 {personalInfo.specialization}
                             </p>
                             <p className="text-sm font-mono text-primary flex items-center gap-1.5 pt-1">
-                                {masterDegree.institution} <br />
-                                {masterDegree.lab}
+                                &gt; {masterDegree.institution} <br />
+                                &gt; {masterDegree.lab}
                             </p>
                         </div>
 
@@ -41,20 +41,20 @@ export default function AcademicHero() {
 
                         {/* Call to Action Buttons */}
                         <div className="flex flex-wrap items-center gap-3 pt-2">
-                            <a
+                            <Link
                                 href={personalInfo.cvPdfPath}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-primary shadow-lg shadow-primary/20 flex items-center gap-2 rounded-xl"
                             >
                                 <FaFileDownload /> Download Academic CV (PDF)
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href={`mailto:${personalInfo.email}`}
                                 className="btn btn-outline flex items-center gap-2 rounded-xl"
                             >
                                 <FaEnvelope /> Contact Researcher
-                            </a>
+                            </Link>
                             <Link
                                 href="/dev"
                                 className="btn btn-secondary btn-outline flex items-center gap-2 rounded-xl"
@@ -65,12 +65,12 @@ export default function AcademicHero() {
 
                         {/* Social & Contact Bar */}
                         <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-base-content/70">
-                            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary font-mono transition-colors">
+                            <Link href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary font-mono transition-colors">
                                 <FaGithub size={16} /> github.com/sabbir2609
-                            </a>
-                            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary font-mono transition-colors">
+                            </Link>
+                            <Link href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary font-mono transition-colors">
                                 <FaLinkedin size={16} /> linkedin.com/in/sabbir2609
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

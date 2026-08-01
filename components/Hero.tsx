@@ -48,7 +48,7 @@ export default function Hero() {
                     <div className="flex flex-col justify-center space-y-4 px-8 lg:mt-0 tracking-tight">
                         <h1 className="text-3xl md:text-4xl lg:6xl font-bold pt-4">First, solve the problem. Then, write the code.</h1>
                         <p className="pt-2 text-lg">- John Johnson</p>
-                        <p className="pt-6 text-lg">I am a Full Stack Developer. I love to solve problems and write code. I am passionate about learning new technologies and building new things. I am a quick learner and love to work in a team. I am always ready to take new challenges and solve them.</p>
+                        <p className="pt-6 text-lg">I am Link Full Stack Developer. I love to solve problems and write code. I am passionate about learning new technologies and building new things. I am Link quick learner and love to work in Link team. I am always ready to take new challenges and solve them.</p>
                         <div className="flex mt-4 space-x-2">
                             <Link
                                 href="/doc/sabbir_academic_cv.pdf"
@@ -67,14 +67,14 @@ export default function Hero() {
                         </div>
                         <div className="flex mt-4 space-x-4">
                             {socialLinks.map((social, key) => (
-                                <a
+                                <Link
                                     key={key}
                                     href={social.href}
                                     target="_blank"
                                     className=" hover:text-primary"
                                 >
                                     {social.icon}
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>

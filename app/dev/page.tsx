@@ -45,14 +45,14 @@ export default function DevPage() {
                         </p>
 
                         <div className="flex flex-wrap items-center gap-3 pt-2">
-                            <a
+                            <Link
                                 href="https://github.com/sabbir2609"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-secondary shadow-lg shadow-secondary/20 flex items-center gap-2 rounded-xl"
                             >
                                 <FaGithub size={18} /> Visit GitHub Profile
-                            </a>
+                            </Link>
                             <Link
                                 href="/"
                                 className="btn btn-outline flex items-center gap-2 rounded-xl"
@@ -176,24 +176,24 @@ export default function DevPage() {
                                 <div className="px-6 py-4 bg-base-200/40 border-t border-base-200 flex items-center justify-between">
                                     <div className="flex items-center gap-2">
                                         {project.githubUrl && (
-                                            <a
+                                            <Link
                                                 href={project.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="btn btn-xs btn-outline gap-1"
                                             >
                                                 <FaGithub /> GitHub
-                                            </a>
+                                            </Link>
                                         )}
                                         {project.liveLink && (
-                                            <a
+                                            <Link
                                                 href={project.liveLink}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="btn btn-xs btn-secondary gap-1"
                                             >
                                                 <FaExternalLinkAlt size={10} /> Live Demo
-                                            </a>
+                                            </Link>
                                         )}
                                     </div>
                                     <span className="text-[10px] font-mono text-base-content/50">sabbir2609</span>

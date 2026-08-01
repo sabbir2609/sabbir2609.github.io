@@ -18,7 +18,7 @@ export default function Footer() {
                         Physics Postgraduate Researcher at Khulna University of Engineering & Technology (KUET), specializing in experimental condensed matter physics, magnetic materials, and Density Functional Theory (DFT).
                     </p>
                     <div className="flex items-center space-x-3 pt-2">
-                        <a
+                        <Link
                             href={cvData.personalInfo.github}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -26,8 +26,8 @@ export default function Footer() {
                             aria-label="GitHub"
                         >
                             <FaGithub size={20} />
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             href={cvData.personalInfo.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -35,8 +35,8 @@ export default function Footer() {
                             aria-label="LinkedIn"
                         >
                             <FaLinkedin size={20} />
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             href="https://x.com/sabbir2609"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -44,14 +44,14 @@ export default function Footer() {
                             aria-label="Twitter"
                         >
                             <FaTwitter size={20} />
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             href={`mailto:${cvData.personalInfo.email}`}
                             className="btn btn-ghost btn-circle btn-sm text-base-content/80 hover:text-primary hover:bg-base-200"
                             aria-label="Email"
                         >
                             <FaEnvelope size={20} />
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
@@ -95,14 +95,14 @@ export default function Footer() {
                             <Link href="/dev#tech-stack" className="hover:text-secondary transition-colors">Full-Stack Tech Stack</Link>
                         </li>
                         <li>
-                            <a
+                            <Link
                                 href={cvData.personalInfo.cvPdfPath}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-primary transition-colors flex items-center gap-1"
                             >
                                 Download Academic CV (PDF)
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
