@@ -1,7 +1,8 @@
 export interface Manuscript {
   id: string;
   title: string;
-  status: 'Under Review' | 'Submitted' | 'In Preparation';
+  doi?: string;
+  status: 'Published' | 'Under Review' | 'Submitted' | 'In Preparation';
   journal: string;
   type: string;
   abstractSummary: string;
@@ -82,9 +83,12 @@ export const cvData = {
     address: "House # 44, Road # 14, Sonadanga R/A (2nd Phase), Khulna, Bangladesh",
     linkedin: "https://www.linkedin.com/in/sabbir2609",
     github: "https://github.com/sabbir2609",
-    cvPdfPath: "/doc/sabbir_academic_cv.pdf",
+    rg: "https://www.researchgate.net/profile/Sabbir-Hasan-Munna",
+    orchid: "0009-0006-6718-7748",
+    google_scholor: "https://scholar.google.com/citations?user=z-NKevIAAAAJ&hl=en",
+    cvPdfPath: "https://drive.google.com/file/d/1vw-YcxTmT3JkHtIniXHVuUsJmYN90Kxe/view?usp=sharing",
     profilePic: "/me/profile.jpg",
-    bio: "I am a Physics postgraduate researcher specialized in computational materials science and experimental condensed matter physics. My research includes synthesis and characterization of functional materials and first-principles Density Functional Theory (DFT) calculations to explore their structural, electronic, magnetic and spin-dependent properties. My expertise includes solid-state synthesis, advanced materials characterization, and scientific computing using Python for data analysis and materials modeling. My recent research on transition-metal-doped two-dimensional materials and altermagnetic systems has further stimulated my interest in electronic structure theory, quantum materials and computational methods for functional materials. I am looking for a PhD position that could combine first-principles simulations and experimental collaboration to further understand and design next-generation materials."
+    bio: "Physics postgraduate researcher with a background in experimental condensed matter physics and computational materials science. Experienced in the synthesis and characterization of magnetic materials using XRD, SEM, VSM, FTIR, EIS, UV–Vis, and DTA, alongside first-principles DFT calculations using VASP, CASTEP, and Quantum ESPRESSO. Skilled in Python-based scientific computing, materials data analysis, and computational materials screening using tools such as pymatgen, MatCalc, and MatterGen. My research focuses on understanding the structural, electronic, magnetic, and dielectric properties of functional materials, with interests in 2D materials, quantum magnetism, spin-dependent phenomena, and low-dimensional quantum systems. Seeking a PhD opportunity to deepen my research experience and contribute to the development and understanding of emerging materials through experimental and computational approaches."
   },
 
   education: [
@@ -131,11 +135,12 @@ export const cvData = {
   manuscripts: [
     {
       id: "ms-1",
-      title: "Improved Wideband Electromagnetic Performance in La3+ Substituted Mn-Zn Spinel Ferrites: Structure-Microstructure Regulation of Grain-Boundary Non-Debye Relaxation",
-      status: "Under Review",
-      journal: "Surfaces and Interfaces",
+      title: "Improved wideband electromagnetic performance in La3+ substituted Mn–Zn spinel ferrites: structure–microstructure regulation of grain-boundary non-Debye relaxation",
+      doi: "https://doi.org/10.1039/d6ra09155e",
+      status: "Published",
+      journal: "RSC Advances",
       type: "Research Article",
-      abstractSummary: "Investigates structural and dielectric non-Debye relaxation behavior engineered through La3+ substitution in Mn-Zn ferrites to achieve enhanced wideband electromagnetic shielding."
+      abstractSummary: "In this study, we investigated how La³⁺ substitution influences the structural, microstructural, magnetic, and electrical properties of Mn–Zn spinel ferrites. By combining broadband magnetic and electrical characterization, we explored the role of grain-boundary properties in non-Debye relaxation and high-frequency electromagnetic performance. Our findings provide insights into tailoring soft magnetic ferrites for high-frequency electronic applications."
     },
     {
       id: "ms-2",
@@ -148,13 +153,20 @@ export const cvData = {
     {
       id: "ms-3",
       title: "Spin-Dependent Dual-Mode Gas Sensing in Bipolar Magnetic Semiconductor Mo-Doped Hexagonal Boron Nitride: A First-Principles Study of CO2, CO, NO, and H2S",
-      status: "Submitted",
-      journal: "Applied Surface Science",
+      status: "Under Review",
+      journal: "Physica B: Condensed Matter",
       type: "First-Principles DFT Study",
       abstractSummary: "DFT calculations revealing spin-polarized transport and dual-mode adsorption kinetics for environmental gas detection using Mo-doped hBN monolayers."
     },
     {
       id: "ms-4",
+      title: "Correlating Spinel–Hematite Phase Evolution with Brick-Layer Impedance and Magnetic Relaxation Dynamics in Manganese-Doped Cobalt Ferrites for High-Q Megahertz Inductor Applications",
+      status: "Submitted",
+      journal: "Applied Physics A",
+      abstractSummary: "Mn substitution in cobalt ferrite ceramics promotes progressive spinel–hematite phase evolution, lattice expansion, and changes in microstructure and local vibrational properties. The resulting phase and interfacial modifications strongly influence electrical and magnetic relaxation, with the x = 0.50 composition exhibiting a high magnetic quality factor of 408.25 at 50 MHz, highlighting its potential for high-frequency magnetic applications."
+    },
+    {
+      id: "ms-5",
       title: "Advanced Frontiers in Spatiotemporal Electron Microscopy: From Sub-Angstrom Ptychography to Quantum Coherence Mapping",
       status: "In Preparation",
       journal: "Light: Science & Applications",
@@ -162,7 +174,7 @@ export const cvData = {
       abstractSummary: "Comprehensive study covering sub-Angstrom electron ptychography, ultrafast electron diffraction, and quantum coherence mapping."
     },
     {
-      id: "ms-5",
+      id: "ms-6",
       title: "Strain-Tunable Anomalous Hall Conductivity in a Rutile Altermagnetic Insulator",
       status: "In Preparation",
       journal: "Physical Review Materials",
@@ -268,6 +280,7 @@ export const cvData = {
         "Vibrating Sample Magnetometry (VSM)",
         "Electrochemical Impedance Spectroscopy (EIS)",
         "Fourier Transform Infrared Spectroscopy (FTIR)",
+        "Ultra-Violet Visible Spectroscopy (UV–Vis)",
         "Thermogravimetric Analysis (TGA)",
         "Rietveld Analysis (Fullprof)"
       ]
@@ -385,8 +398,8 @@ export const cvData = {
   ] as ProfessionalExp[],
 
   memberships: [
-    { name: "Student Member, American Physical Society (APS)", period: "2025 - Present" },
-    { name: "Student Member, Materials Research Society (MRS)", period: "2025 - Present" }
+    { name: "Student Member, American Physical Society (APS)", period: "2025 - June 2026" },
+    { name: "Student Member, Materials Research Society (MRS)", period: "2025 - July 2026" }
   ],
 
   references: [

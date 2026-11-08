@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sabbir Hasan Munna — Academic & Developer Portfolio
+
+Personal portfolio and academic CV website for **Sabbir Hasan Munna**, a Physics Postgraduate Researcher specializing in Experimental Condensed Matter Physics & Computational Materials Science at KUET.
+
+🌐 **Live Site:** [sabbir2609.github.io](https://sabbir2609.github.io)
+
+---
+
+## Features
+
+- Academic CV — research profile, manuscripts, education, conferences, skills
+- Developer portfolio — projects and technical experience
+- MDX blog with math (KaTeX), syntax highlighting, and reading time
+- Click-to-copy DOI for manuscripts
+- Dark/light theme toggle via DaisyUI
+- Fully static export — hosted on GitHub Pages
+
+---
+
+## Tech Stack
+
+| Tool                  | Purpose                      |
+| --------------------- | ---------------------------- |
+| Next.js 16            | Framework (static export)    |
+| TypeScript            | Type safety                  |
+| Tailwind CSS v4       | Styling                      |
+| DaisyUI v5            | UI components & theming      |
+| MDX + next-mdx-remote | Blog content                 |
+| KaTeX + rehype-katex  | Math rendering               |
+| rehype-pretty-code    | Code syntax highlighting     |
+| react-icons           | Icons (FA, SI)               |
+| GitHub Actions        | CI/CD deploy to GitHub Pages |
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+app/                      # Next.js app router pages
+├── blog/                 # Blog listing & post pages
+├── dev/                  # Developer portfolio page
+└── page.tsx              # Academic CV home page
 
-To learn more about Next.js, take a look at the following resources:
+components/
+├── AcademicHero.tsx      # Hero section with stats & social links
+├── AcademicSections.tsx  # All CV sections
+├── utils/
+│   ├── CopyDoi.tsx       # Click-to-copy DOI button
+│   └── ThemeChange.tsx
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+lib/
+├── cvData.ts             # All academic CV data
+├── devData.ts            # Developer portfolio data
+└── posts.ts              # MDX blog post utilities
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+content/
+└── blog/                 # MDX blog posts
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This site is deployed as a static export to **GitHub Pages** via GitHub Actions.
+
+```bash
+npm run build
+```
+
+The workflow in `.github/workflows/` handles automatic deployment on every push to `main`.
+
+---
+
+## Data
+
+All CV content is managed in [`lib/cvData.ts`](lib/cvData.ts) — update manuscripts, education, conferences, skills, and references there without touching any component.
+
+---
+
+## License
+
+MIT
