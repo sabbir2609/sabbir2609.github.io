@@ -13,12 +13,12 @@ interface Props {
 
 export function generateStaticParams() {
     const totalPosts = getPaginatedPosts(1, POSTS_PER_PAGE).totalPosts;
-    const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+    const totalPages = Math.max(1, Math.ceil(totalPosts / POSTS_PER_PAGE));
 
     return Array.from(
-        { length: totalPages - 1 },
+        { length: totalPages },
         (_, i) => ({
-            page: String(i + 2),
+            page: String(i + 1),
         })
     );
 }
@@ -28,7 +28,7 @@ export default async function BlogPagination({
 }: Props) {
     const page = Number((await params).page);
 
-    if (Number.isNaN(page) || page < 2) {
+    if (Number.isNaN(page) || page < 1) {
         notFound();
     }
 
