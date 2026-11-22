@@ -1,0 +1,159 @@
+---
+title: "Running GPU-Accelerated Quantum ESPRESSO on WSL2: Setup, Pitfalls, and Performance Tuning"
+description: "A step-by-step guide to compiling Quantum ESPRESSO with CUDA and OpenACC in WSL2, fixing OpenMPI errors, and maximizing GPU utilization on small unit cells."
+date: "2026-11-22"
+time: "10:24 AM"
+category: "DFT"
+tags:
+  - Nvidia
+  - HPC
+  - Quantum Espresso
+published: true
+id: D001
+cover: "/blog/images/dft_nv_gpu_qe_D001.jpg"
+---
+
+Running Density Functional Theory (DFT) calculations locally on a workstation is a great way to test pseudopotentials, converge cutoffs, and relax unit cells without waiting in remote cluster queues. With **Windows Subsystem for Linux (WSL2)** and the **NVIDIA HPC SDK**, you can compile **Quantum ESPRESSO (QE)** with native CUDA and OpenACC acceleration directly on Windows.
+
+However, getting a smooth build—especially on older consumer GPUs like the **NVIDIA GeForce GTX 1080**—comes with a few subtle compatibility traps. Here is a complete walkthrough covering installation, compilation, WSL2 MPI fixes, and how to saturate your GPU on small unit cells.
+
+## 1. Windows and WSL2 Prerequisites
+
+Before touching Linux packages, make sure your Windows host handles the GPU passthrough properly:
+
+1. **Install the NVIDIA Driver on Windows Only:** Install the standard NVIDIA Game Ready or Studio driver on Windows. **Do not** install a Linux NVIDIA display driver inside WSL2, as it will overwrite WSL2's virtualized GPU libraries.
+2. **Verify GPU Access in WSL2:** Open your Ubuntu WSL2 terminal and check `nvidia-smi`. Because WSL2 places `nvidia-smi` inside `/usr/lib/wsl/lib/`, symlink it so it works everywhere:
+
+```bash
+sudo ln -s /usr/lib/wsl/lib/nvidia-smi /usr/local/bin/nvidia-smi
+nvidia-smi
+```
+
+3. **Install Essential Build Tools:**
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y build-essential git wget curl libfftw3-dev
+```
+
+## 2. Choosing the Right NVIDIA HPC SDK Version
+
+Quantum ESPRESSO relies on NVIDIA's `nvfortran` compiler and CUDA math libraries (`cuFFT`, `cuBLAS`, `cuSOLVER`), all bundled inside the **NVIDIA HPC SDK**.
+
+### The GPU Architecture Catch (`cc61` vs. CUDA 13+)
+
+While it is tempting to install the newest HPC SDK release available, **CUDA 13.0+ dropped compiler and math library support for Pascal (`cc61`) GPUs** (such as the GTX 1080) and requires newer host drivers.
+
+If your `nvidia-smi` reports **CUDA Version: 12.6** and you are running a Pascal-generation GPU, install **`nvhpc-24-11`**, which natively bundles CUDA 12.6 and fully supports `cc61`:
+
+```bash
+curl https://nvidia.com | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg
+echo 'deb [signed-by=/usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg] https://nvidia.com /' | sudo tee /etc/apt/sources.list.d/nvhpc.list
+
+sudo apt update
+sudo apt install -y nvhpc-24-11
+```
+
+## 3. Environment Variables and WSL2 OpenMPI Fixes
+
+Once installed, configure your `~/.bashrc` to load the compilers, MPI wrappers, and WSL2 CUDA libraries.
+
+Crucially, NVIDIA HPC SDK's bundled OpenMPI tries to initialize **HCOLL** (Mellanox InfiniBand hardware collectives) whenever you run more than one MPI process. Because WSL2 has no physical InfiniBand adapter, multi-rank jobs will crash unless you disable HCOLL and restrict UCX transport to shared memory (`sm`) and TCP:
+
+```bash
+cat << 'EOF' >> ~/.bashrc
+export NVARCH=Linux_x86_64
+export NVCOMPILERS=/opt/nvidia/hpc_sdk
+export MANPATH=$MANPATH:$NVCOMPILERS/$NVARCH/24.11/compilers/man
+export PATH=$NVCOMPILERS/$NVARCH/24.11/compilers/bin:$NVCOMPILERS/$NVARCH/24.11/comm_libs/mpi/bin:$PATH
+export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$NVCOMPILERS/$NVARCH/24.11/compilers/lib:$NVCOMPILERS/$NVARCH/24.11/cuda/lib64:$LD_LIBRARY_PATH
+
+# Fix OpenMPI / InfiniBand errors inside WSL2
+export OMPI_MCA_coll_hcoll_enable=0
+export UCX_TLS=sm,self,tcp
+EOF
+
+source ~/.bashrc
+```
+
+Verify that your compilers point to the SDK and check your GPU's compute capability (`Default Target`):
+
+```bash
+which nvfortran mpif90
+nvaccelinfo
+```
+
+Look for `Default Target: cc61` (or your GPU's specific architecture code, such as `cc75` for Turing or `cc86` for Ampere).
+
+## 4. Configuring and Compiling Quantum ESPRESSO
+
+Clone the official Quantum ESPRESSO repository and run `./configure` targeting your exact GPU compute capability and CUDA runtime:
+
+```bash
+git clone https://gitlab.com
+cd q-e
+
+./configure --with-gpu=cuda \
+            --with-cuda-cc=61 \
+            --with-cuda-runtime=12.6 \
+            --enable-openmp \
+            --with-scalapack=no
+```
+
+Before compiling, inspect `make.inc` to verify that both CUDA and OpenACC flags were picked up properly:
+
+```bash
+grep "gpu=" make.inc
+```
+
+You should see `-cuda -gpu=cc61,cuda12.6 -acc` in `CUDA_F90FLAGS` and `LDFLAGS`. Now compile either the core plane-wave and post-processing binaries (`make pw pp -j4`) or the entire Quantum ESPRESSO suite:
+
+```bash
+make all -j4
+```
+
+Depending on your CPU and SSD speed, compiling the full suite takes roughly 30 to 60 minutes. Once complete, add the `bin/` folder to your `PATH`:
+
+```bash
+echo 'export PATH=$HOME/q-e/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+## 5. Performance Tuning: Why GPU Utilization Starts Low (And How to Fix It)
+
+When you launch a standard GPU job using 1 MPI rank and 4 OpenMP threads:
+
+```bash
+export OMP_NUM_THREADS=4
+mpirun -np 1 pw.x -in vc_relax.in > vc_relax.out
+```
+
+You will see `GPU acceleration is ACTIVE` near the top of `vc_relax.out`. However, if you monitor `watch -n 1 nvidia-smi` during a small unit-cell calculation (for example, a 6-atom antiferromagnetic CoF2 rutile cell with DFT+U and an 8x8x12 k-mesh), you might notice **GPU utilization hovering around 17% to 27%**.
+
+### Why does this happen?
+
+1. **Small Matrix Sizes:** With only 6 atoms and ~37 Kohn-Sham bands, the GPU finishes 3D FFTs and dense matrix operations in microseconds and spends much of its time waiting on CPU-side overhead (symmetry operations, DFT+U projections, and k-point loops).
+2. **FP64 Hardware Limits:** DFT relies on double-precision (`FP64`) arithmetic. Consumer GeForce cards have a 1:32 `FP64`-to-`FP32` core ratio, meaning the `FP64` pipeline saturates long before `nvidia-smi`'s overall utilization counter reaches 100%.
+
+### The Fix: K-Point Pools (`-nk`) Across Multiple MPI Ranks
+
+For small unit cells that only consume 1 to 2 GB of VRAM per process, you don't have to restrict yourself to `-np 1`. By splitting your k-point grid across **4 MPI ranks sharing the same 8 GB GPU**, you overlap CPU overhead and feed the GPU concurrent streams:
+
+```bash
+export OMP_NUM_THREADS=1
+mpirun -np 4 pw.x -nk 4 -in vc_relax.in > vc_relax.out
+```
+
+On the exact same 6-atom CoF2 relaxation, scaling from `-np 1` to `-np 4 -nk 4` boosted GPU utilization from **~20% up to 61%**, using **3.7 GB / 8.0 GB VRAM** at a cool 60°C.
+
+### Quick Rule of Thumb for Local GPU Runs
+
+- **Small unit cells (4 to 16 atoms, dense k-meshes):** Use `-np 4 -nk 4` with `OMP_NUM_THREADS=1` to saturate the GPU across k-point pools.
+- **Large supercells (32 to 100+ atoms, sparse k-meshes):** Drop back to `-np 1` or `-np 2` (with `OMP_NUM_THREADS=4` or `2`) so each MPI rank has maximum VRAM headroom and doesn't trigger out-of-memory errors.
+
+## Summary Checklist
+
+- Match your **NVIDIA HPC SDK** CUDA version to your GPU architecture (use `24.11` for Pascal `cc61`).
+- Set `OMPI_MCA_coll_hcoll_enable=0` to prevent InfiniBand crashes in WSL2.
+- Verify `-gpu=ccXX,cudaYY.Y -acc` in `make.inc` before building.
+- Use **k-point parallelization (`-nk 4`)** on small unit cells to keep your GPU fed.

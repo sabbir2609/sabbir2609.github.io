@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { compilePost } from "@/lib/mdx";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
@@ -30,35 +31,55 @@ export default async function BlogPostPage({
     const content = await compilePost(post.content);
 
     return (
-        <main className="mx-auto max-w-3xl px-6 py-12">
-            <h1 className="text-5xl font-bold">
-                {post.title}
-            </h1>
-
-            <p className="mt-3 text-muted-foreground">
-                {post.date} · {post.readingTime}
-            </p>
-
-            <div className="mt-4">
+        <main className="px-2 lg:px-8 py-6">
+            <div className="mb-2">
                 <Link
-                    href={`/blog/category/${post.category}`}
-                    className="rounded bg-muted px-3 py-1 text-sm hover:underline"
+                    href="/blog"
+                    className="text-sm text-base-content/50 hover:text-base-content transition-colors"
                 >
-                    {post.category}
+                    ← Back to blog
                 </Link>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            <h1 className="mt-4 text-3xl font-bold leading-tight">
+                {post.title}
+            </h1>
+
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+                <Link
+                    href={`/blog/category/${post.category}`}
+                    className="rounded-full bg-primary/10 px-3 py-0.5 text-xs font-medium text-primary hover:bg-primary/20 transition-colors"
+                >
+                    {post.category}
+                </Link>
+                <span className="text-sm text-base-content/50">
+                    {post.date} · {post.readingTime}
+                </span>
+            </div>
+
+            <div className="mt-3 flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
                     <Link
                         key={tag}
                         href={`/blog/tag/${tag}`}
-                        className="rounded-full border px-3 py-1 text-sm hover:bg-muted"
+                        className="rounded-full border border-base-300 px-2.5 py-0.5 text-xs hover:bg-base-200 transition-colors"
                     >
                         #{tag}
                     </Link>
                 ))}
             </div>
+
+            {post.cover && (
+                <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
+                    <Image
+                        src={post.cover}
+                        alt={post.title}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+            )}
 
             <article className="prose prose-neutral dark:prose-invert mt-10 max-w-none">
                 {content}

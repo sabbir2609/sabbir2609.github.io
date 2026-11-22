@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "@tailwindcss/typography";
 
 html {
   scroll-behavior: smooth;
 }
+
+.prose pre {
+  overflow-x: auto;
+}
+

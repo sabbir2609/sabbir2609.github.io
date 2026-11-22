@@ -46,7 +46,7 @@ export default async function TagPage({
                         </h2>
                     </Link>
 
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-base-content/60">
                         {post.date} • {post.readingTime}
                     </p>
 

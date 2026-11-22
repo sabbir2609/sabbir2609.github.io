@@ -13,12 +13,12 @@ export default function BlogLayout({
     const categories = getAllCategories();
 
     return (
-        <main className="mx-auto max-w-6xl px-6 py-12">
+        <main className="mx-auto max-w-6xl px-6 py-6">
             <div className="flex flex-col gap-8 md:flex-row">
 
                 <BlogSidebar categories={categories} />
 
-                <section className="flex-1">
+                <section className="flex-1 min-w-0">
                     {children}
                 </section>
 
