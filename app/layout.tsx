@@ -34,6 +34,7 @@ const jost = Jost({
 });
 
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,6 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <meta name="google-site-verification" content="ifbG7iyNbxkFsUeOtIyoRKbgrC2PiVQpx9KsZ7jqE1o" />
       <body className={jost.className}>
         <NextTopLoader />
         <Navbar />
