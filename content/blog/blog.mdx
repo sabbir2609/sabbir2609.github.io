@@ -1,0 +1,127 @@
+---
+title: "The Complete Beginner's Guide to Setting Up Git, SSH, and Your First Push"
+description: "Learn how to configure your global Git username and email, set up passwordless SSH authentication, and push your code to a remote repository."
+date: "2026-11-22"
+time: "12:30 PM"
+category: "Workflow"
+tags:
+  - Git
+  - SSH
+  - GitHub
+published: true
+id: W001
+cover: "/blog/images/git_ssh_setup_W001.jpg"
+---
+
+Coming from a physics background, I’m used to thinking about systems in terms of initial states, boundary conditions, and reproducible experiments. When I first transitioned into writing more code—whether for simulations, data analysis, or software projects—I quickly realized that messy file names like `script_final_v2_actual.py` break reproducibility fast.
+
+Git solves this by treating your codebase like a well-documented lab notebook, tracking every state transition cleanly. Just like setting up your apparatus before taking measurements, getting started with Git requires a quick one-time calibration. Once your initial conditions are set, your daily workflow reduces to a handful of predictable commands.
+
+In this guide, we will walk through setting up your Git identity, securing your connection with SSH keys, and pushing your code to a remote repository.
+
+---
+
+## Step 1: Set Your Global Git Identity
+
+Before you start saving code, Git needs to know who is running the experiment. Every commit you make carries your name and email address so collaborators (and your future self) know who recorded the changes.
+
+Run these two commands in your terminal to set your identity globally across all projects on your computer:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+> **Pro Tip:** Use the exact same email address linked to your GitHub, GitLab, or Bitbucket account. This ensures your commits are properly credited to your profile.
+
+To double-check that your settings saved properly, run:
+
+```bash
+git config --global --list
+```
+
+---
+
+## Step 2: Set Up SSH Keys for Passwordless Authentication
+
+Typing your username and password—or managing personal access tokens—every time you push code adds unnecessary friction. Setting up an **SSH key** creates a secure, cryptographic link between your computer and your Git host so you can push and pull effortlessly.
+
+### 1. Generate a new SSH key pair
+
+Run the following command, substituting your own email address:
+
+```bash
+ssh-keygen -t ed25519 -C "your.email@example.com"
+```
+
+Press **Enter** to save the key in the default location (`~/.ssh/id_ed25519`). When asked for a passphrase, you can enter a password for extra security or press **Enter** twice to skip it.
+
+### 2. Add your key to the SSH agent
+
+Start the SSH agent in the background and register your new private key:
+
+**On Linux or Windows (Git Bash):**
+
+```bash
+eval "\$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+
+**On macOS:**
+
+```bash
+eval "\$(ssh-agent -s)"
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+### 3. Copy your public key
+
+Display your public key in the terminal and copy the entire output (starting with `ssh-ed25519` and ending with your email):
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+### 4. Add the key to your Git host
+
+1. Log in to **GitHub** (or your preferred Git platform).
+2. Navigate to **Settings** > **SSH and GPG keys**.
+3. Click **New SSH key**.
+4. Give it a recognizable title (like _"Work Laptop"_), paste your public key into the text box, and click **Add SSH key**.
+
+### 5. Test your connection
+
+Verify everything works by pinging the server (using GitHub as an example):
+
+```bash
+ssh -T git@github.com
+```
+
+Type `yes` if prompted to trust the host. You should see a welcome message confirming you are successfully authenticated!
+
+---
+
+## Step 3: Commit and Push Your Code
+
+With your identity configured and SSH active, you are ready for the core daily Git workflow. Whenever you make changes to your project files, follow these three steps to save and upload them:
+
+```bash
+# 1. Stage your changes
+git add .
+
+# 2. Save a snapshot with a descriptive message
+git commit -m "Add initial simulation scripts"
+
+# 3. Upload your commits to the remote repository
+git push
+```
+
+> **Note:** If you just created a brand-new branch locally and are pushing it for the first time, run `git push -u origin your-branch-name` to link it to the remote server.
+
+---
+
+## Wrapping Up
+
+And that’s it! With your global config set and SSH keys in place, you have a secure, reproducible Git environment ready for any project.
+
+_Happy coding!_
