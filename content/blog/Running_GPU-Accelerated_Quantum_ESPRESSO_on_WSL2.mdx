@@ -87,12 +87,9 @@ Look for `Default Target: cc61` (or your GPU's specific architecture code, such 
 
 ## 4. Configuring and Compiling Quantum ESPRESSO
 
-Clone the official Quantum ESPRESSO repository and run `./configure` targeting your exact GPU compute capability and CUDA runtime:
+Get the official Quantum ESPRESSO [repository](https://gitlab.com/QEF/q-e/-/releases) extract it and run `./configure` targeting your exact GPU compute capability and CUDA runtime:
 
 ```bash
-git clone https://gitlab.com
-cd q-e
-
 ./configure --with-gpu=cuda \
             --with-cuda-cc=61 \
             --with-cuda-runtime=12.6 \
