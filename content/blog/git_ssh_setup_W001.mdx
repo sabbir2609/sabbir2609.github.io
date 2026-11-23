@@ -63,14 +63,14 @@ Start the SSH agent in the background and register your new private key:
 **On Linux or Windows (Git Bash):**
 
 ```bash
-eval "\$(ssh-agent -s)"
+eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ```
 
 **On macOS:**
 
 ```bash
-eval "\$(ssh-agent -s)"
+eval "$(ssh-agent -s)"
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 ```
 
