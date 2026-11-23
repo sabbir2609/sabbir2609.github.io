@@ -14,16 +14,15 @@ interface Props {
 
 export async function generateStaticParams() {
     return getAllTags().map((tag) => ({
-        tag,
+        tag: encodeURIComponent(tag),
     }));
 }
 
-export default async function TagPage({
-    params,
-}: Props) {
+export default async function TagPage({ params }: Props) {
     const { tag } = await params;
+    const decoded = decodeURIComponent(tag);
 
-    const posts = getPostsByTag(tag);
+    const posts = getPostsByTag(decoded);
 
     if (posts.length === 0) {
         notFound();
@@ -32,7 +31,7 @@ export default async function TagPage({
     return (
         <main className="mx-auto max-w-3xl px-6 py-12">
             <h1 className="text-4xl font-bold mb-8">
-                Tag: {tag}
+                Tag: {decoded}
             </h1>
 
             {posts.map((post) => (

@@ -1,0 +1,129 @@
+---
+title: "How to Install Quantum ESPRESSO 7.6 on Ubuntu 26.04 WSL2"
+description: "A complete step-by-step guide to setting up a custom-location Ubuntu 26.04 WSL2 environment and compiling Quantum ESPRESSO 7.6 with OpenMPI, OpenMP, and ScaLAPACK."
+date: "2026-11-23"
+time: "05:47 PM"
+category: "DFT"
+tags:
+  - Quantum Espresso
+  - WSL2
+  - Ubuntu 26.04
+published: true
+id: D002
+cover: "/blog/images/D002_dft_ubuntu26_qe76.jpg"
+---
+
+Running Density Functional Theory (DFT) calculations on Windows has become effortless with **WSL2** (Windows Subsystem for Linux). By installing Ubuntu 26.04 LTS on a secondary drive and compiling **Quantum ESPRESSO (QE) 7.6** from source with MPI and ScaLAPACK support, you get near-native Linux performance without dual-booting or filling up your primary `C:\` drive.
+
+This guide walks through the entire process—from clean WSL setup to troubleshooting Ubuntu's ScaLAPACK CMake detection.
+
+---
+
+## Step 1: Set Up Ubuntu 26.04 on a Custom Drive in WSL2
+
+If you have an older Ubuntu installation you want to replace, unregister it first in **Windows PowerShell** (back up any important files beforehand, as this deletes the virtual disk):
+
+```powershell
+# List installed distributions
+wsl --list --verbose
+
+# Remove the old distribution
+wsl --unregister Ubuntu-24.04
+```
+
+Next, create a target folder on your desired drive (for example, `D:\WSL`) and install **Ubuntu 26.04**:
+
+```powershell
+New-Item -ItemType Directory -Force -Path "D:\WSL"
+wsl --install Ubuntu-26.04 --location "D:\WSL"
+```
+
+Once the installation finishes, set up your Linux username and password when prompted.
+
+---
+
+## Step 2: Install Compilers and Math Libraries
+
+Open your **Ubuntu 26.04** terminal, update your system packages, and install `gfortran`, CMake, OpenMPI, FFTW3, OpenBLAS, and ScaLAPACK:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y build-essential gfortran cmake git wget \
+  libopenmpi-dev openmpi-bin libfftw3-dev libopenblas-dev \
+  liblapack-dev libscalapack-openmpi-dev
+```
+
+> **Tip:** Installing `libopenblas-dev` provides significantly faster linear algebra performance than the default reference BLAS library.
+
+---
+
+## Step 3: Download Quantum ESPRESSO 7.6
+
+Keep your source code inside the native Linux filesystem (`~/soft`) rather than `/mnt/d`—compiling inside WSL's native ext4 filesystem is dramatically faster.
+
+```bash
+mkdir -p ~/soft && cd ~/soft
+wget https://gitlab.com
+tar -xzf q-e-qe-7.6.tar.gz
+mv q-e-qe-7.6 qe
+cd qe
+```
+
+---
+
+## Step 4: Configure with CMake (Fixing the ScaLAPACK Error)
+
+On Ubuntu 26.04, running a standard CMake configuration with `-DQE_ENABLE_SCALAPACK=ON` often fails with:
+
+```text
+CMake Error at cmake/FindSCALAPACK.cmake:503 (message):
+  A required library with SCALAPACK API not found. Please specify library
+  location: -DSCALAPACK_DIR=/your/path/to/scalapack
+```
+
+This occurs because Quantum ESPRESSO's CMake script searches for `libscalapack.so`, whereas Ubuntu packages the OpenMPI build as `libscalapack-openmpi.so`.
+
+To fix this, pass the exact library path explicitly via `-DSCALAPACK_LIBRARIES`:
+
+```bash
+cmake -S . -B build \
+  -DCMAKE_C_COMPILER=mpicc \
+  -DCMAKE_Fortran_COMPILER=mpif90 \
+  -DQE_ENABLE_MPI=ON \
+  -DQE_ENABLE_OPENMP=ON \
+  -DQE_ENABLE_SCALAPACK=ON \
+  -DSCALAPACK_LIBRARIES="/usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so"
+```
+
+Once CMake finishes with `-- Configuring done` and `-- Generating done`, compile the binaries across all available CPU cores:
+
+```bash
+cmake --build build -j$(nproc)
+```
+
+_(If your system runs out of memory during parallel compilation, lower the thread count using `-j4` or `-j2`.)_
+
+---
+
+## Step 5: Add QE to Your `PATH` and Verify
+
+Add the `build/bin` directory to your `~/.bashrc` so you can run `pw.x` and other executables from any working directory:
+
+```bash
+echo 'export PATH="$HOME/soft/qe/build/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Finally, verify your parallel build:
+
+```bash
+mpirun -np 2 pw.x --version
+```
+
+If everything succeeded, you will see:
+
+```text
+Program PWSCF v.7.6 starts on ...
+```
+
+You are now ready to run parallel DFT calculations on Windows using Quantum ESPRESSO 7.6!

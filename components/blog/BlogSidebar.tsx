@@ -69,7 +69,7 @@ function SidebarContent({ categories, tags }: { categories: string[]; tags: stri
                         {tags.map((tag) => (
                             <Link
                                 key={tag}
-                                href={`/blog/tag/${tag}`}
+                                href={`/blog/tag/${encodeURIComponent(tag)}`}
                                 className="rounded-full border border-base-300 px-2.5 py-0.5 text-xs hover:bg-base-300 transition-colors"
                             >
                                 #{tag}
